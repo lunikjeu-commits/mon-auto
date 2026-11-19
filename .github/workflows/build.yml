@@ -34,8 +34,9 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      - name: Résolution du conflit de dépendances Kotlin
+      - name: Activation du clavier et résolution Kotlin
         run: |
+          sed -i 's/android:windowSoftInputMode="adjustResize"/android:windowSoftInputMode="adjustPan"/g' android/app/src/main/AndroidManifest.xml
           cat << 'EOF' >> android/build.gradle
           subprojects {
               configurations.all {
