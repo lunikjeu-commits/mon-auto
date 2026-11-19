@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mon auto</title>
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-card: #1e293b;
+      --bg-input: #0f172a;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 85px; -webkit-tap-highlight-color: transparent; }
+
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 20px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+    .badge-car { background: rgba(59, 130, 246, 0.15); color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+    .container { padding: 16px; max-width: 600px; margin: 0 auto; }
+    .tab-content { display: none; animation: fadeIn 0.25s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .card-title { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .stat-box { background: var(--bg-card); padding: 14px; border-radius: 12px; border: 1px solid var(--border); }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-value { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.success { color: var(--success); }
+    .stat-value.warning { color: var(--warning); }
+
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 6px;
+    }
+    .btn:active { background-color: var(--accent-hover); transform: scale(0.99); }
+    .btn-danger { background-color: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 10px; font-size: 0.78rem; width: auto; margin-top: 0; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+
+    .history-item {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .history-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .history-type {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+    .type-vidange { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .type-piece { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .history-date { font-size: 0.8rem; color: var(--text-muted); }
+    .history-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .history-costs { display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); background: rgba(255,255,255,0.03); padding: 8px; border-radius: 8px; margin-bottom: 8px; }
+    .history-total { font-weight: 700; color: var(--text-main); margin-left: auto; }
+    .history-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 8px; }
+
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--bg-card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 12px 0;
+      z-index: 100;
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 25%;
+    }
+    .nav-btn.active { color: var(--accent); font-weight: 700; }
+    .nav-icon { font-size: 1.25rem; }
+
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+    .filter-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .filter-chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .toast {
+      position: fixed; top: 75px; left: 50%; transform: translateX(-50%);
+      background: var(--success); color: #fff; padding: 10px 20px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: none; z-index: 200;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🚘 Mon auto</h1>
+    <span class="badge-car" id="header-car-model">Aucun véhicule</span>
+  </header>
+
+  <div id="toast" class="toast">Enregistré avec succès !</div>
+
+  <div class="container">
+    
+    <div id="tab-dashboard" class="tab-content active">
+      <div class="card">
+        <div class="card-title">Fiche du véhicule</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 1.2rem; font-weight: 700;" id="dash-model">Non configuré</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;" id="dash-plate">Immatriculation / Année : -</div>
+          </div>
+          <button class="btn btn-outline" style="width: auto; padding: 8px 12px; font-size: 0.8rem;" onclick="switchTab('tab-car')">Modifier</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Prix d'achat</div>
+          <div class="stat-value" id="stat-buy-price">0 €</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Coût total entretien</div>
+          <div class="stat-value warning" id="stat-maint-total">0 €</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Pièces</div>
+          <div class="stat-value success" id="stat-parts-total">0 €</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Main d'œuvre</div>
+          <div class="stat-value accent" id="stat-labor-total">0 €</div>
+        </div>
+      </div>
+
+      <div class="card" style="background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(30,41,59,1) 100%); border-color: rgba(59,130,246,0.4);">
+        <div class="stat-label">Coût de revient global (Achat + Entretien)</div>
+        <div class="stat-value" style="font-size: 1.6rem; margin-top: 4px;" id="stat-global-total">0 €</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Dernières interventions</div>
+        <div id="recent-list">
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Aucune intervention enregistrée.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-add" class="tab-content">
+      <div class="card">
+        <div class="card-title">Nouvelle opération d'entretien</div>
+        <form id="maintenance-form">
+          <div class="form-group">
+            <label>Type d'intervention</label>
+            <select id="m-type" required>
+              <option value="Remplacement pièce">Remplacement d'une pièce</option>
+              <option value="Vidange">Vidange / Filtres</option>
+              <option value="Réparation">Réparation générale</option>
+              <option value="Révision">Révision / Contrôle</option>
+              <option value="Pneumatiques">Pneumatiques / Freinage</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Désignation (ex: Kit distribution, Vidange 5W30...)</label>
+            <input type="text" id="m-title" placeholder="Nom de la pièce ou réparation" required>
+          </div>
+
+          <div class="row-2">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="m-date" required>
+            </div>
