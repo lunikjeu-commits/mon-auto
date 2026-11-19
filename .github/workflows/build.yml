@@ -34,6 +34,20 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Résolution du conflit de dépendances Kotlin
+        run: |
+          cat << 'EOF' >> android/build.gradle
+          subprojects {
+              configurations.all {
+                  resolutionStrategy {
+                      force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
+                      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
+                      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+                  }
+              }
+          }
+          EOF
+
       - name: Génération de la clé de signature automatique
         run: |
           keytool -genkey -v -keystore monauto.keystore -alias monauto -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=MonAuto, OU=App, O=User, L=Paris, S=France, C=FR"
