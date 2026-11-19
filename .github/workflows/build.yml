@@ -1,0 +1,57 @@
+name: Fabrication APK Mon Auto
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération des fichiers
+        uses: actions/checkout@v4
+
+      - name: Installation de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installation de Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Préparation du projet Web et Capacitor
+        run: |
+          mkdir www
+          cp index.html www/
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "Mon auto" "com.monauto.app" --web-dir www
+          npx cap add android
+          npx cap sync android
+
+      - name: Génération de la clé de signature automatique
+        run: |
+          keytool -genkey -v -keystore monauto.keystore -alias monauto -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=MonAuto, OU=App, O=User, L=Paris, S=France, C=FR"
+
+      - name: Compilation de l'APK Release
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Signature de l'APK final
+        run: |
+          BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | tail -n 1)
+          $BUILD_TOOLS/zipalign -v -p 4 android/app/build/outputs/apk/release/app-release-unsigned.apk app-aligned.apk
+          $BUILD_TOOLS/apksigner sign --ks monauto.keystore --ks-pass pass:123456 --key-pass pass:123456 --out Mon-Auto-Final.apk app-aligned.apk
+
+      - name: Mise à disposition de l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mon-Auto-APK
+          path: Mon-Auto-Final.apk
