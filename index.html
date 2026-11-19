@@ -5,397 +5,198 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mon auto</title>
   <style>
-    :root {
-      --bg-main: #0f172a;
-      --bg-card: #1e293b;
-      --accent: #3b82f6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: #334155;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      padding-bottom: 100px;
-    }
-
-    header {
-      background-color: #1e293b;
-      padding: 18px 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-
-    .badge-car {
-      background: rgba(59, 130, 246, 0.2);
-      color: #60a5fa;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .container {
-      padding: 16px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .card {
-      background-color: var(--bg-card);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
-    }
-
-    .card-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .stat-box {
-      background: var(--bg-card);
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .stat-value.accent { color: #60a5fa; }
-    .stat-value.success { color: #34d399; }
-    .stat-value.warning { color: #fbbf24; }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 14px 12px;
-      background-color: #020617;
-      border: 1px solid #475569;
-      border-radius: 10px;
-      color: #ffffff;
-      font-size: 16px;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background-color: var(--accent);
-      color: #ffffff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .btn-danger {
-      background-color: rgba(239, 68, 68, 0.2);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      padding: 8px 12px;
-      font-size: 0.8rem;
-      width: auto;
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-main);
-    }
-
-    .history-item {
-      background: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 10px;
-    }
-
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .history-type {
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      background: rgba(59, 130, 246, 0.2);
-      color: #60a5fa;
-    }
-
-    .type-vidange {
-      background: rgba(245, 158, 11, 0.2);
-      color: #fbbf24;
-    }
-
-    .type-piece {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-    }
-
-    .history-date {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .history-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .history-costs {
-      display: flex;
-      gap: 10px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.04);
-      padding: 8px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-    }
-
-    .history-total {
-      font-weight: 700;
-      color: var(--text-main);
-      margin-left: auto;
-    }
-
-    .history-note {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    nav.bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 68px;
-      background-color: var(--bg-card);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.75rem;
-      width: 25%;
-    }
-
-    .nav-btn.active {
-      color: #60a5fa;
-      font-weight: 700;
-    }
-
-    .nav-icon {
-      font-size: 1.3rem;
-    }
-
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-      overflow-x: auto;
-    }
-
-    .filter-chip {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      white-space: nowrap;
-    }
-
-    .filter-chip.active {
-      background: var(--accent);
-      color: #ffffff;
-    }
-
-    .toast {
-      position: fixed;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--success);
-      color: #ffffff;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: none;
-      z-index: 1000;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background: #0f172a; color: #f8fafc; padding-bottom: 90px; }
+    header { background: #1e293b; padding: 16px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.25rem; }
+    .badge { background: #2563eb; color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }
+    .page { display: none; padding: 16px; }
+    .page.active { display: block; }
+    .box { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+    h2 { font-size: 1rem; color: #94a3b8; margin-bottom: 12px; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .stat { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 12px; }
+    .stat small { color: #94a3b8; font-size: 0.75rem; display: block; }
+    .stat strong { font-size: 1.15rem; display: block; margin-top: 4px; }
+    label { display: block; font-size: 0.85rem; color: #cbd5e1; margin: 10px 0 4px 0; }
+    input, select, textarea { width: 100%; padding: 12px; background: #020617; border: 1px solid #475569; border-radius: 8px; color: #fff; font-size: 16px; }
+    button.action { width: 100%; padding: 14px; background: #3b82f6; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; margin-top: 16px; }
+    button.del { background: #dc2626; color: #fff; border: none; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; margin-top: 8px; }
+    .item { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
+    .nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: #1e293b; border-top: 1px solid #334155; display: flex; }
+    .nav button { flex: 1; background: none; border: none; color: #94a3b8; font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+    .nav button.active { color: #3b82f6; font-weight: bold; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>🚘 Mon auto</h1>
-    <span class="badge-car" id="header-car-model" onclick="switchTab('tab-car')">Configurer auto</span>
+    <span class="badge" id="top-car" onclick="go('p-car')">Véhicule</span>
   </header>
 
-  <div id="toast" class="toast">Enregistré avec succès !</div>
-
-  <div class="container">
-
-    <div id="tab-dashboard" class="tab-content active">
-      <div class="card">
-        <div class="card-title">Fiche du véhicule</div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <div style="font-size: 1.15rem; font-weight: 700;" id="dash-model">Non configuré</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="dash-plate">Appuyez sur Modifier pour entrer votre auto</div>
-          </div>
-          <button type="button" class="btn btn-outline" style="width: auto; padding: 8px 14px; font-size: 0.85rem;" onclick="switchTab('tab-car')">Modifier</button>
-        </div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-box">
-          <div class="stat-label">Prix d'achat</div>
-          <div class="stat-value" id="stat-buy-price">0,00 €</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Coût total entretien</div>
-          <div class="stat-value warning" id="stat-maint-total">0,00 €</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Total Pièces</div>
-          <div class="stat-value success" id="stat-parts-total">0,00 €</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Total Main d'œuvre</div>
-          <div class="stat-value accent" id="stat-labor-total">0,00 €</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="stat-label">Coût de revient global (Achat + Entretien)</div>
-        <div class="stat-value" style="font-size: 1.5rem; margin-top: 4px;" id="stat-global-total">0,00 €</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Dernières interventions</div>
-        <div id="recent-list">
-          <p style="color: var(--text-muted); font-size: 0.88rem;">Aucune intervention enregistrée.</p>
-        </div>
-      </div>
+  <section id="p-home" class="page active">
+    <div class="box">
+      <h2>Mon Véhicule</h2>
+      <div id="home-car-name" style="font-size: 1.2rem; font-weight: bold;">Aucun véhicule</div>
+      <div id="home-car-info" style="color: #94a3b8; font-size: 0.85rem; margin-top: 4px;">Appuyez sur l'onglet Véhicule en bas</div>
     </div>
 
-    <div id="tab-add" class="tab-content">
-      <div class="card">
-        <div class="card-title">Nouvelle opération d'entretien</div>
-        <form id="maintenance-form">
-          <div class="form-group">
-            <label for="m-type">Type d'intervention</label>
-            <select id="m-type">
-              <option value="Remplacement pièce">Remplacement d'une pièce</option>
-              <option value="Vidange">Vidange / Filtres</option>
-              <option value="Réparation">Réparation générale</option>
-              <option value="Révision">Révision / Contrôle</option>
-              <option value="Pneumatiques">Pneumatiques / Freinage</option>
-            </select>
-          </div>
+    <div class="grid">
+      <div class="stat"><small>Prix d'achat</small><strong id="v-achat">0 €</strong></div>
+      <div class="stat"><small>Total Entretien</small><strong id="v-entretien" style="color:#fbbf24">0 €</strong></div>
+      <div class="stat"><small>Total Pièces</small><strong id="v-pieces" style="color:#34d399">0 €</strong></div>
+      <div class="stat"><small>Main d'œuvre</small><strong id="v-mo" style="color:#60a5fa">0 €</strong></div>
+    </div>
 
-          <div class="form-group">
-            <label for="m-title">Désignation (ex: Kit distribution, Vidange...)</label>
-            <input type="text" id="m-title" placeholder="Nom de la pièce ou réparation" required>
-          </div>
+    <div class="box">
+      <small style="color:#94a3b8">Coût Global (Achat + Réparations)</small>
+      <div id="v-global" style="font-size: 1.5rem; font-weight: bold; margin-top: 4px;">0 €</div>
+    </div>
+  </section>
 
-          <div class="row-2">
-            <div class="form-group">
-              <label for="m-date">Date</label>
-              <input type="date" id="m-date" required>
-            </div>
-            <div class="form-group">
-              <label for="m-km">Kilométrage (km)</label>
-              <input type="number" id="m-km" placeholder="Ex: 125000">
-            </div>
-          </div>
+  <section id="p-add" class="page">
+    <div class="box">
+      <h2>Nouvel entretien / Pièce</h2>
+      <label>Catégorie</label>
+      <select id="f-type">
+        <option value="Remplacement pièce">Remplacement pièce</option>
+        <option value="Vidange">Vidange</option>
+        <option value="Réparation">Réparation</option>
+        <option value="Révision">Révision</option>
+      </select>
 
-          <div class="row-2">
-            <div class="form-group">
-              <label for="m-part-price">Prix des pièces (€)</label>
-              <input type="number" step="0.01" id="m-part-price" placeholder="0.00">
-            </div>
-            <div class="form-group">
-              <label for="m-labor-price">Main d'œuvre (€)</label>
+      <label>Nom de la pièce ou de l'opération</label>
+      <input type="text" id="f-nom" placeholder="Ex: Plaquettes de frein, Vidange...">
+
+      <label>Date</label>
+      <input type="date" id="f-date">
+
+      <label>Kilométrage (km)</label>
+      <input type="number" id="f-km" placeholder="Ex: 115000">
+
+      <label>Prix des pièces (€)</label>
+      <input type="number" step="0.01" id="f-prix-piece" placeholder="0.00">
+
+      <label>Prix main d'œuvre (€)</label>
+      <input type="number" step="0.01" id="f-prix-mo" placeholder="0.00">
+
+      <label>Remarques (facultatif)</label>
+      <textarea id="f-note" rows="2" placeholder="Référence, garage..."></textarea>
+
+      <button type="button" class="action" onclick="ajouterOperation()">Enregistrer</button>
+    </div>
+  </section>
+
+  <section id="p-list" class="page">
+    <div class="box">
+      <h2>Historique des réparations</h2>
+      <div id="liste-operations"></div>
+    </div>
+  </section>
+
+  <section id="p-car" class="page">
+    <div class="box">
+      <h2>Configurer ma voiture</h2>
+      <label>Modèle de la voiture</label>
+      <input type="text" id="c-modele" placeholder="Ex: Peugeot 208, Golf 7...">
+
+      <label>Prix d'achat (€)</label>
+      <input type="number" step="0.01" id="c-prix" placeholder="Ex: 8500">
+
+      <label>Année ou Immatriculation</label>
+      <input type="text" id="c-info" placeholder="Ex: 2018 - AA-123-BB">
+
+      <button type="button" class="action" onclick="sauverVoiture()">Enregistrer la voiture</button>
+    </div>
+  </section>
+
+  <nav class="nav">
+    <button type="button" id="btn-home" class="active" onclick="go('p-home')">📊<span>Bilan</span></button>
+    <button type="button" id="btn-add" onclick="go('p-add')">➕<span>Ajouter</span></button>
+    <button type="button" id="btn-list" onclick="go('p-list')">🔧<span>Suivi</span></button>
+    <button type="button" id="btn-car" onclick="go('p-car')">🚗<span>Véhicule</span></button>
+  </nav>
+
+  <script>
+    var data = JSON.parse(localStorage.getItem('mon_auto_v2') || '{"car":{"modele":"","prix":0,"info":""},"ops":[]}');
+    document.getElementById('f-date').valueAsDate = new Date();
+
+    function go(id) {
+      var pages = document.querySelectorAll('.page');
+      for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+      document.getElementById(id).classList.add('active');
+
+      var btns = document.querySelectorAll('.nav button');
+      for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active');
+      if (id === 'p-home') document.getElementById('btn-home').classList.add('active');
+      if (id === 'p-add') document.getElementById('btn-add').classList.add('active');
+      if (id === 'p-list') document.getElementById('btn-list').classList.add('active');
+      if (id === 'p-car') document.getElementById('btn-car').classList.add('active');
+    }
+
+    function sauverVoiture() {
+      var m = document.getElementById('c-modele').value;
+      var p = parseFloat(document.getElementById('c-prix').value) || 0;
+      var inf = document.getElementById('c-info').value;
+      if (!m) { alert('Entrez le modèle de la voiture'); return; }
+      data.car = { modele: m, prix: p, info: inf };
+      localStorage.setItem('mon_auto_v2', JSON.stringify(data));
+      afficher();
+      alert('Voiture enregistrée !');
+      go('p-home');
+    }
+
+    function ajouterOperation() {
+      var nom = document.getElementById('f-nom').value;
+      if (!nom) { alert('Entrez le nom de la pièce ou opération'); return; }
+      var op = {
+        id: Date.now(),
+        type: document.getElementById('f-type').value,
+        nom: nom,
+        date: document.getElementById('f-date').value,
+        km: document.getElementById('f-km').value,
+        piece: parseFloat(document.getElementById('f-prix-piece').value) || 0,
+        mo: parseFloat(document.getElementById('f-prix-mo').value) || 0,
+        note: document.getElementById('f-note').value
+      };
+      data.ops.unshift(op);
+      localStorage.setItem('mon_auto_v2', JSON.stringify(data));
+      document.getElementById('f-nom').value = '';
+      document.getElementById('f-km').value = '';
+      document.getElementById('f-prix-piece').value = '';
+      document.getElementById('f-prix-mo').value = '';
+      document.getElementById('f-note').value = '';
+      afficher();
+      alert('Opération ajoutée !');
+      go('p-list');
+    }
+
+    function supprimerOp(id) {
+      data.ops = data.ops.filter(function(o) { return o.id !== id; });
+      localStorage.setItem('mon_auto_v2', JSON.stringify(data));
+      afficher();
+    }
+
+    function afficher() {
+      document.getElementById('top-car').innerText = data.car.modele || 'Véhicule';
+      document.getElementById('home-car-name').innerText = data.car.modele || 'Aucun véhicule configuré';
+      document.getElementById('home-car-info').innerText = data.car.info || 'Appuyez sur Véhicule en bas à droite';
+      document.getElementById('c-modele').value = data.car.modele;
+      document.getElementById('c-prix').value = data.car.prix || '';
+      document.getElementById('c-info').value = data.car.info;
+
+      var tPiece = 0, tMo = 0;
+      var html = '';
+      for (var i = 0; i < data.ops.length; i++) {
+        var o = data.ops[i];
+        tPiece += o.piece;
+        tMo += o.mo;
+        html += '<div class="item">' +
+          '<div style="color:#60a5fa;font-size:0.75rem;font-weight:bold;">' + o.type + ' • ' + o.date + (o.km ? ' • ' + o.km + ' km' : '') + '</div>' +
+          '<div style="font-size:1.05rem;font-weight:bold;margin:4px 0;">' + o.nom + '</div>' +
+          '<div style="font-size:0.85rem;color:#cbd5e1;">Pièces: ' + o.piece.toFixed(2) + ' € | M.O: ' + o.mo.toFixed(2) + ' € | <strong>Total: ' + (o.piece + o.mo).toFixed(2) + ' €</strong></div>' +
+          (o.note ? '<div style="font-size:0.8rem;color:#94a3b8;margin-top:4px;">' + o.note + '</div>' : '') +
+          '<button type="button" class="del" onclick="supprimerOp(' + o.id + ')">Supprimer</button>' +
+        '</div>';
+      }
