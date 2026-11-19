@@ -8,9 +8,7 @@
     :root {
       --bg-main: #0f172a;
       --bg-card: #1e293b;
-      --bg-input: #0f172a;
       --accent: #3b82f6;
-      --accent-hover: #2563eb;
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
@@ -19,26 +17,55 @@
       --border: #334155;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 95px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding-bottom: 100px;
+    }
 
     header {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      padding: 20px 18px;
+      background-color: #1e293b;
+      padding: 18px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
-    header h1 { font-size: 1.35rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .badge-car { background: rgba(59, 130, 246, 0.15); color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.3); }
 
-    .container { padding: 16px; max-width: 600px; margin: 0 auto; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .badge-car {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .container {
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
 
     .card {
       background-color: var(--bg-card);
@@ -47,18 +74,55 @@
       margin-bottom: 16px;
       border: 1px solid var(--border);
     }
-    .card-title { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .stat-box { background: var(--bg-card); padding: 14px; border-radius: 12px; border: 1px solid var(--border); }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
-    .stat-value { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
-    .stat-value.accent { color: var(--accent); }
-    .stat-value.success { color: var(--success); }
-    .stat-value.warning { color: var(--warning); }
 
-    .form-group { margin-bottom: 14px; }
-    label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .stat-value.accent { color: #60a5fa; }
+    .stat-value.success { color: #34d399; }
+    .stat-value.warning { color: #fbbf24; }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
     input, select, textarea {
       width: 100%;
       padding: 14px 12px;
@@ -67,65 +131,122 @@
       border-radius: 10px;
       color: #ffffff;
       font-size: 16px;
-      -webkit-user-select: text;
-      user-select: text;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: 2px solid rgba(59,130,246,0.3); }
-    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
 
     .btn {
       width: 100%;
       padding: 14px;
       background-color: var(--accent);
-      color: white;
+      color: #ffffff;
       border: none;
       border-radius: 10px;
       font-size: 1rem;
       font-weight: 600;
-      cursor: pointer;
       margin-top: 6px;
     }
-    .btn-danger { background-color: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 10px; font-size: 0.78rem; width: auto; margin-top: 0; }
-    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+
+    .btn-danger {
+      background-color: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      width: auto;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
 
     .history-item {
-      background: var(--bg-input);
+      background: #0f172a;
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 14px;
       margin-bottom: 10px;
     }
-    .history-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
     .history-type {
-      display: inline-block;
       padding: 3px 8px;
       border-radius: 6px;
       font-size: 0.72rem;
       font-weight: 700;
-      text-transform: uppercase;
       background: rgba(59, 130, 246, 0.2);
       color: #60a5fa;
     }
-    .type-vidange { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-    .type-piece { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-    .history-date { font-size: 0.8rem; color: var(--text-muted); }
-    .history-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
-    .history-costs { display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); background: rgba(255,255,255,0.03); padding: 8px; border-radius: 8px; margin-bottom: 8px; }
-    .history-total { font-weight: 700; color: var(--text-main); margin-left: auto; }
-    .history-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 8px; }
+
+    .type-vidange {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+    }
+
+    .type-piece {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .history-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .history-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .history-costs {
+      display: flex;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .history-total {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-left: auto;
+    }
+
+    .history-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
 
     nav.bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
+      height: 68px;
       background-color: var(--bg-card);
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-around;
-      padding: 10px 0 14px 0;
-      z-index: 100;
+      align-items: center;
+      z-index: 999;
     }
+
     .nav-btn {
       background: none;
       border: none;
@@ -135,14 +256,25 @@
       align-items: center;
       gap: 4px;
       font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
       width: 25%;
     }
-    .nav-btn.active { color: var(--accent); font-weight: 700; }
-    .nav-icon { font-size: 1.3rem; }
 
-    .filter-bar { display: flex; gap: 8px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+    .nav-btn.active {
+      color: #60a5fa;
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      font-size: 1.3rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+    }
+
     .filter-chip {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -151,15 +283,26 @@
       border-radius: 20px;
       font-size: 0.8rem;
       white-space: nowrap;
-      cursor: pointer;
     }
-    .filter-chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .filter-chip.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
 
     .toast {
-      position: fixed; top: 75px; left: 50%; transform: translateX(-50%);
-      background: var(--success); color: #fff; padding: 10px 20px; border-radius: 20px;
-      font-size: 0.85rem; font-weight: 600;
-      display: none; z-index: 200;
+      position: fixed;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--success);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: none;
+      z-index: 1000;
     }
   </style>
 </head>
@@ -173,41 +316,41 @@
   <div id="toast" class="toast">Enregistré avec succès !</div>
 
   <div class="container">
-    
+
     <div id="tab-dashboard" class="tab-content active">
       <div class="card">
         <div class="card-title">Fiche du véhicule</div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <div style="font-size: 1.2rem; font-weight: 700;" id="dash-model">Non configuré</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;" id="dash-plate">Appuyez sur Modifier pour entrer votre auto</div>
+            <div style="font-size: 1.15rem; font-weight: 700;" id="dash-model">Non configuré</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;" id="dash-plate">Appuyez sur Modifier pour entrer votre auto</div>
           </div>
-          <button type="button" class="btn btn-outline" style="width: auto; padding: 8px 12px; font-size: 0.85rem;" onclick="switchTab('tab-car')">Modifier</button>
+          <button type="button" class="btn btn-outline" style="width: auto; padding: 8px 14px; font-size: 0.85rem;" onclick="switchTab('tab-car')">Modifier</button>
         </div>
       </div>
 
       <div class="stats-grid">
         <div class="stat-box">
           <div class="stat-label">Prix d'achat</div>
-          <div class="stat-value" id="stat-buy-price">0 €</div>
+          <div class="stat-value" id="stat-buy-price">0,00 €</div>
         </div>
         <div class="stat-box">
           <div class="stat-label">Coût total entretien</div>
-          <div class="stat-value warning" id="stat-maint-total">0 €</div>
+          <div class="stat-value warning" id="stat-maint-total">0,00 €</div>
         </div>
         <div class="stat-box">
           <div class="stat-label">Total Pièces</div>
-          <div class="stat-value success" id="stat-parts-total">0 €</div>
+          <div class="stat-value success" id="stat-parts-total">0,00 €</div>
         </div>
         <div class="stat-box">
           <div class="stat-label">Total Main d'œuvre</div>
-          <div class="stat-value accent" id="stat-labor-total">0 €</div>
+          <div class="stat-value accent" id="stat-labor-total">0,00 €</div>
         </div>
       </div>
 
-      <div class="card" style="background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(30,41,59,1) 100%); border-color: rgba(59,130,246,0.4);">
+      <div class="card">
         <div class="stat-label">Coût de revient global (Achat + Entretien)</div>
-        <div class="stat-value" style="font-size: 1.6rem; margin-top: 4px;" id="stat-global-total">0 €</div>
+        <div class="stat-value" style="font-size: 1.5rem; margin-top: 4px;" id="stat-global-total">0,00 €</div>
       </div>
 
       <div class="card">
@@ -223,8 +366,8 @@
         <div class="card-title">Nouvelle opération d'entretien</div>
         <form id="maintenance-form">
           <div class="form-group">
-            <label>Type d'intervention</label>
-            <select id="m-type" required>
+            <label for="m-type">Type d'intervention</label>
+            <select id="m-type">
               <option value="Remplacement pièce">Remplacement d'une pièce</option>
               <option value="Vidange">Vidange / Filtres</option>
               <option value="Réparation">Réparation générale</option>
@@ -234,23 +377,25 @@
           </div>
 
           <div class="form-group">
-            <label>Désignation (ex: Kit distribution, Vidange 5W30...)</label>
+            <label for="m-title">Désignation (ex: Kit distribution, Vidange...)</label>
             <input type="text" id="m-title" placeholder="Nom de la pièce ou réparation" required>
           </div>
 
           <div class="row-2">
             <div class="form-group">
-              <label>Date</label>
+              <label for="m-date">Date</label>
               <input type="date" id="m-date" required>
             </div>
             <div class="form-group">
-              <label>Kilométrage (km)</label>
+              <label for="m-km">Kilométrage (km)</label>
               <input type="number" id="m-km" placeholder="Ex: 125000">
             </div>
           </div>
 
           <div class="row-2">
             <div class="form-group">
-              <label>Prix des pièces (€)</label>
+              <label for="m-part-price">Prix des pièces (€)</label>
               <input type="number" step="0.01" id="m-part-price" placeholder="0.00">
             </div>
+            <div class="form-group">
+              <label for="m-labor-price">Main d'œuvre (€)</label>
